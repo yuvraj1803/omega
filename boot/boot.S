@@ -28,9 +28,10 @@ _start:
 	bl cpu_check
 
 	// we initialise bss section to zero.
-
 	bl bss_init
 
+	b monitor_main
+	
     b halt
 
 bss_init:	
@@ -103,6 +104,8 @@ el2_to_el3:
 el3_init:
 	// now that we are in EL3, we need to initialise it before hopping into monitor_main().
 	
+	ldr x0, =EL3_SCR
+	msr scr_el3, x0
 	ret
 
 cpu_check:

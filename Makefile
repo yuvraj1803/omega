@@ -14,7 +14,7 @@ ASMFLAGS = -g -I$(INC)
 all: deltaV omega.bin
 
 OBJ += ./build/boot/boot.S.o
-OBJ += ./build/core/main.o
+OBJ += ./build/core/monitor_main.o
 OBJ += ./build/mm/mm.o
 OBJ += ./build/mm/mm.S.o
 OBJ += ./build/mm/paging.S.o
