@@ -11,4 +11,7 @@
 
 // #define DEBUG
 
+#define EL3_SCTLR_WITH_MMU  /*M*/   (1 << 0)
+#define EL3_SCTLR_NO_MMU                0
+
 #endif

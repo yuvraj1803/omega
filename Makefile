@@ -17,6 +17,7 @@ OBJ += ./build/boot/boot.S.o
 OBJ += ./build/core/main.o
 OBJ += ./build/mm/mm.o
 OBJ += ./build/mm/mm.S.o
+OBJ += ./build/mm/paging.S.o
 OBJ += ./build/drivers/uart.o
 OBJ += ./build/lib/stdio.o
 OBJ += ./build/lib/memory.o
@@ -75,6 +76,7 @@ clean:
 	cd deltaV && make clean
 	rm -f *.elf
 	rm -f *.img
+	rm -f *.bin
 	find ./build -name '*.o' -delete 
 	find ./build -name '*.d' -delete
 	rm -f *.list

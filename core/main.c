@@ -4,7 +4,7 @@
  *
  */
 
-int main(){
+int monitor_main(){
 
 
 
