@@ -62,11 +62,45 @@ go_to_el3:
 	ret
 
 el2_to_el3:
+
+/*
+
+	:BAD SITUATION:
+
+	Raspberry Pi-3B has an armstub8.bin that is placed at 0x0 and runs at
+	 reset.
+
+	This puts the system at EL2 at jumps to 0x80000(where we place _start).
+
+	While emulating with QEMU, I was not able to find a way to override this armstub8.bin.
+
+	So while at EL2, we cannot modify VBAR_EL3, which is essential to jump back to EL3.
+
+	The reset value of VBAR_EL3 is 0x0, hence all SMC calls from EL2 jump to 0X400.
+
+	:INTERESTING PART:
+
+	So I placed the value 0xd61f0020 at address 0x0. This is the "br x1" instruction in little-endian format.
+
+	So we load x1 with the address of el3_init and jump to 0x400 with "smc 0".
+
+	AND 0x400 has value that translates too "br x1" which is nothing but a jump to "el3_init".
+
+	NOW WE ARE FINALLY IN EL3!!!
+
+ */
+
+	adr x1, el3_init
+	ldr x2, =0xd61f0020
+	ldr x3, =0x400
+	str x2, [x3]
+	smc 0
+
 	ret
 
 el3_init:
 	// now that we are in EL3, we need to initialise it before hopping into monitor_main().
-
+	
 	ret
 
 cpu_check:
@@ -79,4 +113,3 @@ cpu_check:
 halt:
 	wfe
 	b halt 
-	
