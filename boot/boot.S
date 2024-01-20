@@ -20,6 +20,8 @@ _start:
 
 	bl disable_mmu
 
+	// from this point onwards WXN is turned on. so cheeky tricks like the one we did in "go_to_el3" WONT WORK FROM HERE!
+
 	// we need to be on the primary CPU on bootup. we check this.
 	// if the check fails, we halt.
 
