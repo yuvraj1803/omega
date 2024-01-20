@@ -71,6 +71,8 @@ debug: omega.bin
 gdb: omega.bin
 	gdb-multiarch -ex "target remote localhost:1234" -ex "add-symbol-file omega.elf"
 
+list: omega.bin
+	aarch64-linux-gnu-objdump -D omega.elf > omega.list
 
 clean:
 	cd deltaV && make clean
