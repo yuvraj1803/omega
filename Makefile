@@ -18,6 +18,7 @@ OBJ += ./build/monitor/monitor_main.o
 OBJ += ./build/monitor/irq.S.o
 OBJ += ./build/monitor/irq.o
 OBJ += ./build/monitor/exceptions.S.o
+OBJ += ./build/monitor/sync.o
 OBJ += ./build/mm/mm.o
 OBJ += ./build/mm/mm.S.o
 OBJ += ./build/mm/paging.S.o

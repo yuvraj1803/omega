@@ -29,7 +29,12 @@
 
 .macro handle_sync_interrupt
 	monitor_entry
-	
+	mrs x0, esr_el3
+	mrs x1, elr_el3
+	mrs x2, far_el3
+	mov x3, x0
+	and x3, x3, 0xffff 	// smc number = ESR_EL2[15:0]
+	bl handle_sync
 	monitor_exit
 .endm
 
