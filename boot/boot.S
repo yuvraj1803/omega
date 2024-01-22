@@ -30,6 +30,9 @@ _start:
 	// we initialise bss section to zero.
 	bl bss_init
 
+	// initialise the stack pointer for EL3.
+	bl sp_init	
+
 	b monitor_main
 	
     b halt
@@ -43,6 +46,11 @@ bss_init:
 	add x0, x0, 1
 	cmp x0, x1
 	ble 1b
+	ret
+
+sp_init:
+	ldr x0, =__omega_start
+	mov sp, x0
 	ret
 
 go_to_el3:
