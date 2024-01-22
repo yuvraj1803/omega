@@ -4,8 +4,11 @@
  *
  */
 
+#include "monitor/irq.h"
+
 int monitor_main(){
 
+	__disable_irq();
 
 
 	while(1);

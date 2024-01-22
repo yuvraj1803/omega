@@ -15,6 +15,7 @@ all: deltaV omega.bin
 
 OBJ += ./build/boot/boot.S.o
 OBJ += ./build/monitor/monitor_main.o
+OBJ += ./build/monitor/irq.S.o
 OBJ += ./build/mm/mm.o
 OBJ += ./build/mm/mm.S.o
 OBJ += ./build/mm/paging.S.o
@@ -27,6 +28,11 @@ OBJ += ./build/debug/debug.o
 
 
 ./build/boot/%.S.o: ./boot/%.S
+	@echo [CC] $@
+	$(CC) $(ASMFLAGS) -c $< -o $@
+
+
+./build/monitor/%.S.o: ./monitor/%.S
 	@echo [CC] $@
 	$(CC) $(ASMFLAGS) -c $< -o $@
 
