@@ -5,6 +5,7 @@
  */
 
 #include "monitor/irq.h"
+#include "mm/mm.h"
 #include "drivers/uart.h"
 #include "stdio.h"
 
@@ -13,6 +14,7 @@ int monitor_main(){
 	__disable_irq();
 
 	uart_init();
+	
 
 	while(1);
 }
