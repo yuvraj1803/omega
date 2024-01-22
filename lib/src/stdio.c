@@ -76,7 +76,7 @@ void printf(char* fmt, ...){
 
 
 void log(char *str){
-	uart_write("LOG: ");
+	uart_write("[OMEGA]: ");
 	printf(str);
 	uart_write("\n");
 }
