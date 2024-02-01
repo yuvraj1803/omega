@@ -30,7 +30,8 @@ OBJ += ./build/lib/memory.o
 OBJ += ./build/lib/string.o
 OBJ += ./build/lib/stdlib.o
 OBJ += ./build/debug/debug.o
-
+OBJ += ./build/fs/diskio.o
+OBJ += ./build/fs/ff.o
 
 ./build/boot/%.S.o: ./boot/%.S
 	@echo [CC] $@
@@ -58,6 +59,10 @@ OBJ += ./build/debug/debug.o
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ./build/debug/%.o: ./debug/%.c
+	@echo [CC] $@
+	$(CC) $(CFLAGS) -c $< -o $@
+
+./build/fs/%.o: ./fs/%.c
 	@echo [CC] $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
