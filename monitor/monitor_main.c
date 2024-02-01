@@ -14,7 +14,8 @@ int monitor_main(){
 	__disable_irq();
 
 	uart_init();
-	
+
+	printf("hello world");
 
 	while(1);
 }
