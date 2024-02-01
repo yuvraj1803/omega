@@ -11,6 +11,7 @@
 // #define DEBUG
 
 #define BIT(x)                          ((1U << x))
+#define BL33_BASE                       0x1000000
 
 #define EL3_SCTLR_M                     BIT(0)
 #define EL3_SCTLR_WXN                   BIT(19)

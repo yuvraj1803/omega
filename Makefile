@@ -20,6 +20,7 @@ OBJ += ./build/monitor/irq.o
 OBJ += ./build/monitor/exceptions.S.o
 OBJ += ./build/monitor/delay.o
 OBJ += ./build/monitor/sync.o
+OBJ += ./build/monitor/bl33_loader.o
 OBJ += ./build/mm/mm.o
 OBJ += ./build/mm/mm.S.o
 OBJ += ./build/mm/paging.S.o
@@ -92,7 +93,7 @@ sdcard:	deltaV
 
 
 deltaV:
-	cd deltaV && make
+	cd deltaV && OMEGA=1 make
 
 run: omega.bin
 	qemu-system-aarch64 -M raspi3b -nographic -serial null -serial mon:stdio -m 1024 -drive file=./sdcard.img,if=sd,format=raw -kernel ./omega.bin
@@ -100,7 +101,7 @@ run: omega.bin
 debug: omega.bin
 	qemu-system-aarch64 -M raspi3b -nographic -serial null -serial mon:stdio -m 1024 -drive file=./sdcard.img,if=sd,format=raw -kernel ./omega.bin -s -S
 
-gdb: omega.bin
+gdb: 
 	gdb-multiarch -ex "target remote localhost:1234" -ex "add-symbol-file omega.elf"
 
 list: omega.bin

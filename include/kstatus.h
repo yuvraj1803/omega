@@ -15,6 +15,8 @@ enum ERRORS{
 
     ERR_MALLOC_FAIL,
 
+    ERR_BL33_IMAGE_LOAD_FAIL
+
 };
 
 #endif

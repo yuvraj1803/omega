@@ -9,6 +9,9 @@
 #include "drivers/uart.h"
 #include "drivers/sd.h"
 #include "stdio.h"
+#include "fs/ff.h"
+#include "config.h"
+#include "monitor/bl33_loader.h"
 
 int monitor_main(){
 
@@ -16,9 +19,12 @@ int monitor_main(){
 
 	uart_init();
 	sd_init();
+	fs_init();
 
+	printf("%d",bl33_loader_load_image("/kernel8.img", BL33_BASE));
+	
 
-	printf("hello world");
+	// printf("hello world");
 
 	while(1);
 }
