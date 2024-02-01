@@ -66,18 +66,34 @@ OBJ += ./build/debug/debug.o
 	$(CC) $(ASMFLAGS) -c $< -o $@
 
 
-omega.bin: $(OBJ)
+omega.bin: sdcard $(OBJ)
 	$(LD) -T linker.ld -o ./omega.elf $(OBJ_C) $(OBJ)
 	$(OBJCOPY) ./omega.elf -O binary ./omega.bin
+
+sdcard:	deltaV
+	sudo modprobe nbd max_part=8
+	qemu-img create sdcard.img 128m
+	sudo qemu-nbd -c /dev/nbd0 --format=raw sdcard.img 
+	(echo o; echo n; echo p; echo 1; echo ; echo ;echo w; echo q) | sudo fdisk /dev/nbd0
+	@sudo mkfs.fat -F32 /dev/nbd0p1
+	mkdir temp || true
+	sudo mount -o user /dev/nbd0p1 temp/
+	sudo cp ./deltaV/kernel8.img temp/
+	sleep 1s
+	sudo umount temp/
+	rmdir temp/ || true
+	@sudo qemu-nbd -d /dev/nbd0
+	(echo t; echo c; echo w; echo q) | sudo fdisk sdcard.img
+
 
 deltaV:
 	cd deltaV && make
 
 run: omega.bin
-	qemu-system-aarch64 -M raspi3b -nographic -serial null -serial mon:stdio -m 1024 -kernel ./omega.bin
+	qemu-system-aarch64 -M raspi3b -nographic -serial null -serial mon:stdio -m 1024 -drive file=./sdcard.img,if=sd,format=raw -kernel ./omega.bin
 
 debug: omega.bin
-	qemu-system-aarch64 -M raspi3b -nographic -serial null -serial mon:stdio -m 1024 -kernel ./omega.bin -s -S
+	qemu-system-aarch64 -M raspi3b -nographic -serial null -serial mon:stdio -m 1024 -drive file=./sdcard.img,if=sd,format=raw -kernel ./omega.bin -s -S
 
 gdb: omega.bin
 	gdb-multiarch -ex "target remote localhost:1234" -ex "add-symbol-file omega.elf"
