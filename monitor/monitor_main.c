@@ -25,7 +25,5 @@ int monitor_main(){
 	bl33_loader_load_image("/kernel8.img", BL33_BASE);
 	context_switch_to_el2(BL33_BASE);
 
-	// printf("hello world");
-
 	while(1);
 }
