@@ -22,7 +22,9 @@ int monitor_main(){
 	fs_init();
 	irq_init();
 	
-	bl33_loader_load_image("/kernel8.img", BL33_BASE);
+	// kernel8.img is the compiled binary of the deltaV hypervisor.
+	// deltaV is compiled with entry at BL33_BASE while building itself. check makefile and OMEGA env variable.
+	bl33_loader_load_image("/kernel8.img", BL33_BASE);	
 	context_switch_to_el2(BL33_BASE);
 
 	while(1);
