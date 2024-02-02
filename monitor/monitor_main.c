@@ -13,6 +13,7 @@
 #include "config.h"
 #include "monitor/bl33_loader.h"
 #include "monitor/context.h"
+#include "auth/auth.h"
 
 int monitor_main(){
 
@@ -21,10 +22,13 @@ int monitor_main(){
 	uart_init();
 	fs_init();
 	irq_init();
+	auth_init();
 	
 	// kernel8.img is the compiled binary of the deltaV hypervisor.
 	// deltaV is compiled with entry at BL33_BASE while building itself. check makefile and OMEGA env variable.
-	bl33_loader_load_image("/kernel8.img", BL33_BASE);	
+	if(bl33_loader_load_image("/kernel8.img", BL33_BASE) < 0){
+		panic("Failed to load BL33 image.");
+	}
 	context_switch_to_el2(BL33_BASE);
 
 	while(1);
