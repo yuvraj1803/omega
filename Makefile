@@ -105,7 +105,7 @@ debug: omega.bin
 	qemu-system-aarch64 -M raspi3b -nographic -serial null -serial mon:stdio -m 1024 -drive file=./sdcard.img,if=sd,format=raw -kernel ./omega.bin -s -S
 
 gdb: 
-	gdb-multiarch -ex "target remote localhost:1234" -ex "add-symbol-file omega.elf"
+	gdb-multiarch -ex "target remote localhost:1234" -ex "add-symbol-file omega.elf" -ex "add-symbol-file ./deltaV/deltaV.elf" -ex "add-symbol-file ./deltaV/guests/deltaOS/deltaOS.elf"
 
 list: omega.bin
 	aarch64-linux-gnu-objdump -D omega.elf > omega.list
