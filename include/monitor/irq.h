@@ -1,3 +1,9 @@
+/*
+ *
+ * Copyright (c) 2024 Yuvraj Sakshith <ysakshith@gmail.com>
+ *
+ */
+
 #ifndef __IRQ_H__
 #define __IRQ_H__
 

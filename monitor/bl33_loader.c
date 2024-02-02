@@ -1,3 +1,9 @@
+/*
+ *
+ * Copyright (c) 2024 Yuvraj Sakshith <ysakshith@gmail.com>
+ *
+ */
+
 #include "monitor/bl33_loader.h"
 #include "fs/ff.h"
 #include <stdint.h>

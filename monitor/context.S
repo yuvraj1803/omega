@@ -1,3 +1,9 @@
+/*
+ *
+ * Copyright (c) 2024 Yuvraj Sakshith <ysakshith@gmail.com>
+ *
+ */
+
 #include "config.h"
 
 .globl __context_switch_to_el2

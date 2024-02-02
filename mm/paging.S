@@ -1,3 +1,9 @@
+/*
+ *
+ * Copyright (c) 2024 Yuvraj Sakshith <ysakshith@gmail.com>
+ *
+ */
+
 #include "config.h"
 
 .globl enable_mmu
