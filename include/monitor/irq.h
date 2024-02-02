@@ -3,5 +3,6 @@
 
 void __disable_irq();
 void __enable_irq();
+void irq_init();
 
 #endif

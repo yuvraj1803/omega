@@ -19,6 +19,7 @@ int monitor_main(){
 
 	uart_init();
 	fs_init();
+	irq_init();
 	
 	bl33_loader_load_image("/kernel8.img", BL33_BASE);
 	
