@@ -21,7 +21,7 @@ int monitor_main(){
 	sd_init();
 	fs_init();
 
-	printf("%d",bl33_loader_load_image("/kernel8.img", BL33_BASE));
+	bl33_loader_load_image("/kernel8.img", BL33_BASE);
 	
 
 	// printf("hello world");
