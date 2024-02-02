@@ -12,6 +12,7 @@
 #include "fs/ff.h"
 #include "config.h"
 #include "monitor/bl33_loader.h"
+#include "monitor/context.h"
 
 int monitor_main(){
 
@@ -22,7 +23,7 @@ int monitor_main(){
 	irq_init();
 	
 	bl33_loader_load_image("/kernel8.img", BL33_BASE);
-	
+	context_switch_to_el2(BL33_BASE);
 
 	// printf("hello world");
 
