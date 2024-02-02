@@ -87,6 +87,7 @@ sdcard:	deltaV
 	mkdir temp || true
 	sudo mount -o user /dev/nbd0p1 temp/
 	sudo cp ./deltaV/kernel8.img temp/
+	sudo cp -r ./deltaV/guests temp/
 	sleep 1s
 	sudo umount temp/
 	rmdir temp/ || true
