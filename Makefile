@@ -22,6 +22,7 @@ OBJ += ./build/monitor/delay.o
 OBJ += ./build/monitor/context.o
 OBJ += ./build/monitor/context.S.o
 OBJ += ./build/monitor/sync.o
+OBJ += ./build/monitor/misc.S.o
 OBJ += ./build/monitor/bl33_loader.o
 OBJ += ./build/mm/mm.o
 OBJ += ./build/mm/mm.S.o
