@@ -14,6 +14,7 @@
 #include "monitor/bl33_loader.h"
 #include "monitor/context.h"
 #include "auth/auth.h"
+#include "crypto/crypto.h"
 
 int monitor_main(){
 
@@ -22,6 +23,7 @@ int monitor_main(){
 	uart_init();
 	fs_init();
 	irq_init();
+	crypto_init();
 	auth_init();
 	
 	// kernel8.img is the compiled binary of the deltaV hypervisor.
