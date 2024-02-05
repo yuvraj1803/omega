@@ -84,7 +84,12 @@ uint8_t get_exception_class(uint64_t esr_el3){
 }
 
 
-void handle_sync(uint64_t esr_el3, uint64_t elr_el3, uint64_t far_el3, uint64_t smc_number){
+void handle_sync(uint64_t esr_el3, uint64_t elr_el3, uint64_t far_el3, 	uint64_t smc_number, 
+																	   	uint64_t smc_arg0,
+																		uint64_t smc_arg1,
+																		uint64_t smc_arg2){
+
+
 
     uint8_t EC = get_exception_class(esr_el3);
 
