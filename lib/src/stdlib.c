@@ -12,6 +12,12 @@
 char* itoa(long long num){
 	    char* num_a = (char*) malloc(20); // assuming max 20 digit number.
 
+		if(num == 0){
+			num_a[0] = '0';
+			num_a[1] = '\0';
+			return num_a;
+		}
+
 	    int digits = 0;
 	    int temp = num;
 	    while(temp > 0){
