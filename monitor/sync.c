@@ -75,14 +75,14 @@ const char *sync_info[] = {
 	"BRK instruction execution in AArch64 state.",
 };
 
-#define ESR_EC_SHIFT 26
+#define ESR_EC_SHIFT 			26
+#define ESR_EC_SMC_AA64_MASK 	0b010111
 
 extern void halt();
 
 uint8_t get_exception_class(uint64_t esr_el3){
     return (esr_el3 >> ESR_EC_SHIFT) & 0b111111;
 }
-
 
 void handle_sync(uint64_t esr_el3, uint64_t elr_el3, uint64_t far_el3, 	uint64_t smc_number, 
 																	   	uint64_t smc_arg0,
@@ -95,7 +95,12 @@ void handle_sync(uint64_t esr_el3, uint64_t elr_el3, uint64_t far_el3, 	uint64_t
 
 
 
-    switch(EC){
+    switch(EC){	
+		
+		// sync came from aa64 smc 
+		case ESR_EC_SMC_AA64_MASK:	
+			printf("SMC\n%d\n%d\n%d\n%d\n", smc_number, smc_arg0, smc_arg1, smc_arg2);
+			break;
 
         default:
             debug("[OMEGA]: Unsupported sync exception occurred => INFO: %s ESR: %x ELR: %x FAR: %x\n", sync_info[EC], esr_el3, elr_el3, far_el3);
