@@ -39,6 +39,7 @@ OBJ += ./build/fs/ff.o
 OBJ += ./build/auth/auth.o
 OBJ += ./build/crypto/crypto.o
 OBJ += ./build/crypto/crypto.S.o
+OBJ += ./build/ocom/ocom.o
 
 ./build/boot/%.S.o: ./boot/%.S
 	@echo [CC] $@
@@ -88,6 +89,11 @@ OBJ += ./build/crypto/crypto.S.o
 ./build/crypto/%.S.o: ./crypto/%.S
 	@echo [CC] $@
 	$(CC) $(ASMFLAGS) -c $< -o $@
+
+./build/ocom/%.o: ./ocom/%.c
+	@echo [CC] $@
+	$(CC) $(CFLAGS) -c $< -o $@
+
 
 omega.bin: sdcard $(OBJ)
 	$(LD) -T linker.ld -o ./omega.elf $(OBJ_C) $(OBJ)
