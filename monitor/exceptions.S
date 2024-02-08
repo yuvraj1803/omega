@@ -72,7 +72,7 @@
 	monitor_entry
 	mov x4, x1	// smc_arg0
 	mov x5, x2	// smc_arg1
-	mov x6, x3	// smc_arg2
+	mov x6, sp	// smc_arg2
 	mrs x0, esr_el3
 	mrs x1, elr_el3
 	mrs x2, far_el3

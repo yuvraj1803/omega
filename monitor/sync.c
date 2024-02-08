@@ -10,6 +10,8 @@
 #include "kstatus.h"
 #include "debug/debug.h"
 #include <stdint.h>
+#include "monitor/pt_regs.h"
+#include "ocom/ocom.h"
 
 const char *sync_info[] = {
 	"Unknown reason.",
@@ -87,19 +89,31 @@ uint8_t get_exception_class(uint64_t esr_el3){
 void handle_sync(uint64_t esr_el3, uint64_t elr_el3, uint64_t far_el3, 	uint64_t smc_number, 
 																	   	uint64_t smc_arg0,
 																		uint64_t smc_arg1,
-																		uint64_t smc_arg2){
+																		uint64_t pt_regs_base){
 
+// smc_number = the SMC function id called from the lower aarch64 exception level.
+// smc_arg0 is the value of the hash index according to the ocom specification
+// smc_arg1 is the page aligned address of the page to be put in isolated storage. This adderss is in the VM's IPA
+// pt_regs_base is the address of the saved context in the interrupt stack.
 
 
     uint8_t EC = get_exception_class(esr_el3);
 
-
+	struct pt_regs* regs = (struct pt_regs*) pt_regs_base;
 
     switch(EC){	
 		
 		// sync came from aa64 smc 
 		case ESR_EC_SMC_AA64_MASK:	
-			printf("SMC\n%d\n%d\n%d\n%d\n", smc_number, smc_arg0, smc_arg1, smc_arg2);
+			int ret;
+
+			if(smc_number == OCOM_STORE_SMC_NR) ret = ocom_store_page(smc_arg0, smc_arg1);
+			if(smc_number == OCOM_LOAD_SMC_NR)	ret = ocom_load_page (smc_arg0, smc_arg1);
+
+			 regs->regs[0] = ret;	// regs[0] is nothing but the first register in the pt_regs structure which is X0 reg placeholder.
+							// this value will be put back to the actual X0 register when interrupt context is restore while 
+							// jumping back to the virtual machine.
+
 			break;
 
         default:
