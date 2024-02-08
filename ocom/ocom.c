@@ -10,6 +10,7 @@
 // the monitor will take the mapping of key and place the page in the destination virtual address provided.
 int ocom_load_page(uint64_t key, uint64_t dest_virt){
 
+    return 0;
 }
 
 
@@ -17,4 +18,5 @@ int ocom_load_page(uint64_t key, uint64_t dest_virt){
 // this contents will be store in the NAS.
 int ocom_store_page(uint64_t key, uint64_t src_virt){
 
+    return 0;   
 }
