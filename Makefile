@@ -43,56 +43,56 @@ OBJ += ./build/crypto/crypto.S.o
 OBJ += ./build/ocom/ocom.o
 
 ./build/boot/%.S.o: ./boot/%.S
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(ASMFLAGS) -c $< -o $@
 
 
 ./build/monitor/%.S.o: ./monitor/%.S
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(ASMFLAGS) -c $< -o $@
 
 ./build/monitor/%.o: ./monitor/%.c
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ./build/drivers/%.o: ./drivers/%.c
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ./build/mm/%.o: ./mm/%.c
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ./build/lib/%.o: ./lib/src/%.c
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ./build/debug/%.o: ./debug/%.c
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ./build/fs/%.o: ./fs/%.c
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ./build/mm/%.S.o: ./mm/%.S
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(ASMFLAGS) -c $< -o $@
 
 ./build/auth/%.o: ./auth/%.c
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ./build/crypto/%.o: ./crypto/%.c
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ./build/crypto/%.S.o: ./crypto/%.S
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(ASMFLAGS) -c $< -o $@
 
 ./build/ocom/%.o: ./ocom/%.c
-	@echo [CC] $@
+	@echo CC $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
 
