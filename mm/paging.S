@@ -8,6 +8,7 @@
 
 .globl enable_mmu
 .globl disable_mmu
+.globl get_vttbr_el2
 
 enable_mmu:
         ldr x1, = EL3_SCTLR_WITH_MMU
