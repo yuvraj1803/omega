@@ -11,5 +11,6 @@
 #include <stdint.h>
 
 uint64_t get_vttbr_el2();
+uint64_t paging_va_to_pa(uint64_t va);
 
 #endif

@@ -27,6 +27,7 @@ OBJ += ./build/monitor/bl33_loader.o
 OBJ += ./build/mm/mm.o
 OBJ += ./build/mm/mm.S.o
 OBJ += ./build/mm/paging.S.o
+OBJ += ./build/mm/paging.o
 OBJ += ./build/drivers/uart.o
 OBJ += ./build/drivers/sd.o
 OBJ += ./build/lib/stdio.o
