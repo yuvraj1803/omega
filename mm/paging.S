@@ -24,3 +24,7 @@ disable_mmu:
         msr sctlr_el3, x1
         isb
 	ret
+
+get_vttbr_el2:
+	mrs x0, vttbr_el2
+	ret
