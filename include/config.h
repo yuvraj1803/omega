@@ -10,6 +10,8 @@
 
 // #define DEBUG
 
+#define OMEGA_KEY_SIZE                  256
+
 #define BIT(x)                          ((1U << x))
 #define BL33_BASE                       0x1000000
 
