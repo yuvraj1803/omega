@@ -100,6 +100,14 @@ omega.bin: sdcard $(OBJ)
 	$(LD) -T linker.ld -o ./omega.elf $(OBJ_C) $(OBJ)
 	$(OBJCOPY) ./omega.elf -O binary ./omega.bin
 
+
+ifeq ($(shell test -e ./sdcard.img && echo -n yes),yes)
+    SDCARD_IMAGE_EXISTS=1
+endif
+
+ifdef SDCARD_IMAGE_EXISTS
+sdcard:
+else
 sdcard:	deltaV
 	sudo modprobe nbd max_part=8
 	qemu-img create sdcard.img 128m
@@ -115,6 +123,7 @@ sdcard:	deltaV
 	rmdir temp/ || true
 	@sudo qemu-nbd -d /dev/nbd0
 	(echo t; echo c; echo w; echo q) | sudo fdisk sdcard.img
+endif
 
 
 deltaV:
